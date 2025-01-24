@@ -3,6 +3,7 @@
 [![Crates.io](https://img.shields.io/crates/v/tge)](https://crates.io/crates/tge)
 [![Docs.rs](https://docs.rs/tge/badge.svg)](https://docs.rs/tge)
 [![License](https://img.shields.io/crates/l/tge)](#License)
+[<img src="https://api.gitsponsors.com/api/badge/img?id=229923331" height="20">](https://api.gitsponsors.com/api/badge/link?p=86jGYW1t0rcGV7ZvoVkWtq1MOvipR8fwqiE8kkUmNbPUiELUbc0aR8HPcOrWSBzyyIPf10+nugS3KBwzZfaUuHLlZQGp3qEUlYnUMPHQYiimb09P+hFLqna7GVPA+IOgnMCxEFP/NBsX4/zAjOM+/g==)
 
 A lightweight cross-platform 2D game framework written in pure Rust and based on OpenGL 3.3+.
 
