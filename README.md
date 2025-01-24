@@ -6,10 +6,6 @@
 
 A lightweight cross-platform 2D game framework written in pure Rust and based on OpenGL 3.3+.
 
-Inspired by [LÖVE](https://love2d.org).
-
-__Tge is currently in a very early stage of development. The API may be changed. Until the version to `0.1.0`.__
-
 ## Features
 
 * 2D only and use pixel unit.
@@ -89,21 +85,51 @@ That is!
 
 You can also see the [`examples/`](examples/) directory to learn other examples.
 
-## Performance
+## Examples
 
-See the example [`bunny_mark`](examples/bunny_mark.rs) and [`hare_mark`](examples/hare_mark.rs).
+### [camera](examples/camera.rs)
 
-## TODO
+![camera](docs/camera.png)
 
-The following is working in progress:
+### [cannon](examples/cannon.rs)
 
-* blend
-* program uniform
-* screenshot
-* virtual assets path
-* assets load async
-* audio
-* document
+![cannon](docs/cannon.png)
+
+### [clock](examples/clock.rs)
+
+![clock](docs/clock.png)
+
+### [bunny_mark](examples/bunny_mark.rs)
+
+![bunny_mark](docs/bunny_mark.png)
+
+### [hare_mark](examples/hare_mark.rs)
+
+![hare_mark](docs/hare_mark.png)
+
+### [frame_animation](examples/frame_animation.rs)
+
+![frame_animation](docs/frame_animation.png)
+
+### [parallax_forest](examples/parallax_forest.rs)
+
+![parallax_forest](docs/parallax_forest.png)
+
+### [parallax_mountain](examples/parallax_mountain.rs)
+
+![parallax_mountain](docs/parallax_mountain.png)
+
+### [dvd](examples/dvd.rs)
+
+![dvd](docs/dvd.png)
+
+### [text_layout](examples/text_layout.rs)
+
+![text_layout](docs/text_layout.png)
+
+### [stroke_text](examples/stroke_text.rs)
+
+![stroke_text](docs/stroke_text.png)
 
 ## License
 
