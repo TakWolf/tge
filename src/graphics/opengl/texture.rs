@@ -44,7 +44,7 @@ impl Texture {
                 0,
                 glow::RGBA,
                 glow::UNSIGNED_BYTE,
-                pixels,
+                PixelUnpackData::Slice(pixels),
             );
         }
     }
@@ -60,10 +60,7 @@ impl Texture {
                 height as i32,
                 glow::RGBA,
                 glow::UNSIGNED_BYTE,
-                match pixels {
-                    Some(pixels) => PixelUnpackData::Slice(pixels),
-                    None => PixelUnpackData::BufferOffset(0),
-                },
+                PixelUnpackData::Slice(pixels),
             );
         }
     }
