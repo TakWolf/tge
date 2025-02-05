@@ -1,8 +1,8 @@
 [package]
 name = "tge"
 version = "0.0.4"
+edition = "2021"
 authors = ["TakWolf <takwolf@foxmail.com>"]
-edition = "2018"
 description = "A lightweight cross-platform 2D game framework written in pure Rust and based on OpenGL 3.3+."
 readme = "README.md"
 repository = "https://github.com/TakWolf/tge"
