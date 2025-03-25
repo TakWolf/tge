@@ -133,4 +133,4 @@ You can also see the [`examples/`](examples/) directory to learn other examples.
 
 ## License
 
-[MIT](LICENSE-MIT) OR [Apache-2.0](LICENSE-APACHE)
+[MIT License](LICENSE-MIT) OR [Apache License 2.0](LICENSE-APACHE)
