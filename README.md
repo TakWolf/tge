@@ -1,6 +1,6 @@
 # TakWolf's Game Engine (tge)
 
-[![Crates.io](https://img.shields.io/crates/v/tge)](https://crates.io/crates/tge)
+[![crates.io](https://img.shields.io/crates/v/tge)](https://crates.io/crates/tge)
 [![Docs.rs](https://docs.rs/tge/badge.svg)](https://docs.rs/tge)
 [![License](https://img.shields.io/crates/l/tge)](#License)
 
@@ -89,47 +89,47 @@ You can also see the [`examples/`](examples/) directory to learn other examples.
 
 ### [camera](examples/camera.rs)
 
-![camera](docs/camera.png)
+![Camera](docs/camera.png)
 
 ### [cannon](examples/cannon.rs)
 
-![cannon](docs/cannon.png)
+![Cannon](docs/cannon.png)
 
 ### [clock](examples/clock.rs)
 
-![clock](docs/clock.png)
+![Clock](docs/clock.png)
 
 ### [bunny_mark](examples/bunny_mark.rs)
 
-![bunny_mark](docs/bunny_mark.png)
+![Bunny Mark](docs/bunny_mark.png)
 
 ### [hare_mark](examples/hare_mark.rs)
 
-![hare_mark](docs/hare_mark.png)
+![Hare Mark](docs/hare_mark.png)
 
 ### [frame_animation](examples/frame_animation.rs)
 
-![frame_animation](docs/frame_animation.png)
+![Frame Animation](docs/frame_animation.png)
 
 ### [parallax_forest](examples/parallax_forest.rs)
 
-![parallax_forest](docs/parallax_forest.png)
+![Parallax Forest](docs/parallax_forest.png)
 
 ### [parallax_mountain](examples/parallax_mountain.rs)
 
-![parallax_mountain](docs/parallax_mountain.png)
+![Parallax Mountain](docs/parallax_mountain.png)
 
 ### [dvd](examples/dvd.rs)
 
-![dvd](docs/dvd.png)
+![DVD](docs/dvd.png)
 
 ### [text_layout](examples/text_layout.rs)
 
-![text_layout](docs/text_layout.png)
+![Text Layout](docs/text_layout.png)
 
 ### [stroke_text](examples/stroke_text.rs)
 
-![stroke_text](docs/stroke_text.png)
+![Stroke Text](docs/stroke_text.png)
 
 ## License
 
