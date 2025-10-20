@@ -1,7 +1,7 @@
 [package]
 name = "tge"
 version = "0.0.4"
-edition = "2021"
+edition = "2024"
 authors = ["TakWolf <takwolf@foxmail.com>"]
 description = "A lightweight cross-platform 2D game framework written in pure Rust and based on OpenGL 3.3+"
 readme = "README.md"
@@ -10,7 +10,6 @@ license = "MIT OR Apache-2.0"
 keywords = ["game", "graphics"]
 categories = ["game-engines"]
 exclude = ["examples/**", "assets/**"]
-publish = false
 
 [dependencies]
 winit = "0.26.1"
