@@ -16,17 +16,17 @@ struct Hare {
 
 impl Hare {
     fn new(rand: &mut ThreadRng, graphics_size: &Size) -> Self {
-        let x = rand.gen_range(0.0..=graphics_size.width);
-        let y = rand.gen_range(0.0..=graphics_size.height);
-        let speed_x = rand.gen_range(-100.0..=100.0);
-        let speed_y = rand.gen_range(-100.0..=100.0);
-        let angle = rand.gen_range(0.0..=std::f32::consts::PI * 2.0);
-        let angle_speed = rand.gen_range(-10.0..=10.0);
-        let scale = rand.gen_range(0.5..=1.0);
-        let red = rand.gen_range(0.5..=1.0);
-        let green = rand.gen_range(0.5..=1.0);
-        let blue = rand.gen_range(0.5..=1.0);
-        let alpha = rand.gen_range(0.5..=1.0);
+        let x = rand.random_range(0.0..=graphics_size.width);
+        let y = rand.random_range(0.0..=graphics_size.height);
+        let speed_x = rand.random_range(-100.0..=100.0);
+        let speed_y = rand.random_range(-100.0..=100.0);
+        let angle = rand.random_range(0.0..=std::f32::consts::PI * 2.0);
+        let angle_speed = rand.random_range(-10.0..=10.0);
+        let scale = rand.random_range(0.5..=1.0);
+        let red = rand.random_range(0.5..=1.0);
+        let green = rand.random_range(0.5..=1.0);
+        let blue = rand.random_range(0.5..=1.0);
+        let alpha = rand.random_range(0.5..=1.0);
         Self {
             position: Position::new(x, y),
             speed: Vector::new(speed_x, speed_y),
@@ -47,7 +47,7 @@ struct App {
 impl App {
     fn new(engine: &mut Engine) -> GameResult<Self> {
         let texture_hare = Texture::load(engine, "assets/hare.png")?;
-        let mut rand = rand::thread_rng();
+        let mut rand = rand::rng();
         let mut hares = Vec::with_capacity(STEP_COUNT);
         let graphics_size = engine.graphics().size();
         for _ in 0..STEP_COUNT {

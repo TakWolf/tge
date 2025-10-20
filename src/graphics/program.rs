@@ -29,7 +29,7 @@ impl Program {
     }
 
     pub(crate) fn default(gl: Rc<Context>) -> GameResult<Rc<opengl::Program>> {
-        let program = super::opengl::Program::new(
+        let program = opengl::Program::new(
             gl,
             DEFAULT_VERTEX_SHADER_SOURCE,
             DEFAULT_FRAGMENT_SHADER_SOURCE,

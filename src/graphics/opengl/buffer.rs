@@ -49,7 +49,7 @@ impl<T> Buffer<T> {
         let id = unsafe {
             gl.create_buffer()?
         };
-        let unit_bytes_size = std::mem::size_of::<T>();
+        let unit_bytes_size = size_of::<T>();
         Ok(Self {
             gl,
             id,
@@ -97,7 +97,7 @@ impl<T> Buffer<T> {
         unsafe {
             self.gl.buffer_data_u8_slice(
                 self.target.to_flag(),
-                std::slice::from_raw_parts(data.as_ptr().cast(), std::mem::size_of_val(data)),
+                std::slice::from_raw_parts(data.as_ptr().cast(), size_of_val(data)),
                 usage.to_flag(),
             );
         }
@@ -108,7 +108,7 @@ impl<T> Buffer<T> {
             self.gl.buffer_sub_data_u8_slice(
                 self.target.to_flag(),
                 (self.unit_bytes_size * offset) as i32,
-                std::slice::from_raw_parts(data.as_ptr().cast(), std::mem::size_of_val(data)),
+                std::slice::from_raw_parts(data.as_ptr().cast(), size_of_val(data)),
             );
         }
     }

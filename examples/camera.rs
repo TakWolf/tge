@@ -140,8 +140,8 @@ impl App {
     fn draw_coordinates(&mut self, engine: &mut Engine) {
         let viewport_size = engine.graphics().viewport().size();
         let max_distance = viewport_size.width.max(viewport_size.height);
-        for x in -10..10 as isize {
-            for y in -10..10 as isize {
+        for x in -10..10isize {
+            for y in -10..10isize {
                 let position = Position::new(x as f32 * 100.0 + 50.0, y as f32 * 100.0 + 50.0);
                 if (position.x - self.car.position.x).abs() <= max_distance && (position.y - self.car.position.y).abs() <= max_distance {
                     engine.graphics().draw_sprite(
@@ -156,8 +156,8 @@ impl App {
                 }
             }
         }
-        for x in -10..10 as isize {
-            for y in -10..10 as isize {
+        for x in -10..10isize {
+            for y in -10..10isize {
                 let position = Position::new(x as f32 * 100.0 + 50.0, y as f32 * 100.0 + 50.0);
                 if (position.x - self.car.position.x).abs() <= max_distance && (position.y - self.car.position.y).abs() <= max_distance {
                     let coordinates = {

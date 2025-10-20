@@ -13,8 +13,8 @@ struct Bunny {
 
 impl Bunny {
     fn new(rand: &mut ThreadRng) -> Self {
-        let speed_x = rand.gen::<f32>() * 5.0;
-        let speed_y = rand.gen::<f32>() * 5.0 - 2.5;
+        let speed_x = rand.random::<f32>() * 5.0;
+        let speed_y = rand.random::<f32>() * 5.0 - 2.5;
         Self {
             position: Position::zero(),
             speed: Vector::new(speed_x, speed_y),
@@ -31,7 +31,7 @@ struct App {
 impl App {
     fn new(engine: &mut Engine) -> GameResult<Self> {
         let texture_bunny = Texture::load(engine, "assets/bunny.png")?;
-        let mut rand = rand::thread_rng();
+        let mut rand = rand::rng();
         let mut bunnies = Vec::with_capacity(STEP_COUNT);
         for _ in 0..STEP_COUNT {
             bunnies.push(Bunny::new(&mut rand));
@@ -73,8 +73,8 @@ impl Game for App {
             if bunny.position.y > max_position.y {
                 bunny.position.y = max_position.y;
                 bunny.speed.y *= -0.8;
-                if self.rand.gen::<bool>() {
-                    bunny.speed.y -= self.rand.gen::<f32>() * 4.0 + 3.0;
+                if self.rand.random::<bool>() {
+                    bunny.speed.y -= self.rand.random::<f32>() * 4.0 + 3.0;
                 }
             }
         }

@@ -24,7 +24,7 @@ impl App {
         let position = Position::new(graphics_size.width / 2.0, graphics_size.height / 2.0);
         let speed = Vector::new(1.0, 1.0);
         let color = Color::new(0.5, 0.5, 1.0, 1.0);
-        let rand = rand::thread_rng();
+        let rand = rand::rng();
         Ok(Self {
             texture_dvd_logo,
             size,
@@ -36,9 +36,9 @@ impl App {
     }
 
     fn set_logo_random_color(&mut self) {
-        let red = self.rand.gen::<f32>() * 0.6 + 0.4;
-        let green = self.rand.gen::<f32>() * 0.6 + 0.4;
-        let blue = self.rand.gen::<f32>() * 0.6 + 0.4;
+        let red = self.rand.random::<f32>() * 0.6 + 0.4;
+        let green = self.rand.random::<f32>() * 0.6 + 0.4;
+        let blue = self.rand.random::<f32>() * 0.6 + 0.4;
         self.color = Color::new(red, green, blue, 1.0);
     }
 }
