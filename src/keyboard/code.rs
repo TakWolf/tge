@@ -97,7 +97,7 @@ pub enum KeyCode {
     RCtrl,
     /// or left option on macOS
     LAlt,
-    /// or right option on macOs
+    /// or right option on macOS
     RAlt,
     /// or left command on macOS
     LWin,
