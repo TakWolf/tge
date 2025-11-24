@@ -14,15 +14,15 @@ exclude = ["examples/**", "assets/**"]
 [dependencies]
 winit = "0.26.1"
 glutin = "0.28.0"
-glow = "0.16.0"
-glam = "0.29.2"
-image = "0.25.5"
-fontdue = "0.9.2"
-gilrs = "0.11.0"
+glow = "0.17.0"
+glam = "0.32.1"
+image = "0.25.10"
+fontdue = "0.9.3"
+gilrs = "0.11.1"
 
 [dev-dependencies]
-rand = "0.9.0"
-chrono = "0.4.39"
+rand = "0.10.1"
+chrono = "0.4.44"
 
 [profile.dev]
 opt-level = 3
