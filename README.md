@@ -1,8 +1,6 @@
 # TakWolf's Game Engine (tge)
 
-[![crates.io](https://img.shields.io/crates/v/tge)](https://crates.io/crates/tge)
-[![Docs.rs](https://docs.rs/tge/badge.svg)](https://docs.rs/tge)
-[![License](https://img.shields.io/crates/l/tge)](#License)
+[![crates.io](https://img.shields.io/crates/v/tge?style=flat-square)](https://crates.io/crates/tge)
 
 A lightweight cross-platform 2D game framework written in pure Rust and based on OpenGL 3.3+.
 
