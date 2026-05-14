@@ -1,6 +1,6 @@
 use tge::prelude::*;
-use rand::Rng;
 use rand::rngs::ThreadRng;
+use rand::RngExt;
 
 const TITLE: &str = "Bunny Mark";
 const STEP_COUNT: usize = 1000;
