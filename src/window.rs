@@ -222,7 +222,7 @@ impl Window {
         self.transparent
     }
 
-    pub fn is_decorations(&self) -> bool {
+    pub fn has_decorations(&self) -> bool {
         self.decorations
     }
 
