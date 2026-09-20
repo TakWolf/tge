@@ -41,7 +41,7 @@ pub struct Buffer<T> {
     id: BufferId,
     target: BufferTarget,
     phantom: PhantomData<T>,
-    unit_bytes_size: usize,
+    unit_size_in_bytes: usize,
 }
 
 impl<T> Buffer<T> {
@@ -49,13 +49,13 @@ impl<T> Buffer<T> {
         let id = unsafe {
             gl.create_buffer()?
         };
-        let unit_bytes_size = size_of::<T>();
+        let unit_size_in_bytes = size_of::<T>();
         Ok(Self {
             gl,
             id,
             target,
             phantom: PhantomData,
-            unit_bytes_size,
+            unit_size_in_bytes,
         })
     }
 
@@ -67,8 +67,8 @@ impl<T> Buffer<T> {
         self.target
     }
 
-    pub fn unit_bytes_size(&self) -> usize {
-        self.unit_bytes_size
+    pub fn unit_size_in_bytes(&self) -> usize {
+        self.unit_size_in_bytes
     }
 
     pub fn bind(&self) {
@@ -87,7 +87,7 @@ impl<T> Buffer<T> {
         unsafe {
             self.gl.buffer_data_size(
                 self.target.to_flag(),
-                (self.unit_bytes_size * size) as i32,
+                (self.unit_size_in_bytes * size) as i32,
                 usage.to_flag(),
             );
         }
@@ -107,7 +107,7 @@ impl<T> Buffer<T> {
         unsafe {
             self.gl.buffer_sub_data_u8_slice(
                 self.target.to_flag(),
-                (self.unit_bytes_size * offset) as i32,
+                (self.unit_size_in_bytes * offset) as i32,
                 std::slice::from_raw_parts(data.as_ptr().cast(), size_of_val(data)),
             );
         }
@@ -142,8 +142,8 @@ impl VertexBuffer {
                 size as i32,
                 glow::FLOAT,
                 false,
-                (self.unit_bytes_size * stride) as i32,
-                (self.unit_bytes_size * offset) as i32,
+                (self.unit_size_in_bytes * stride) as i32,
+                (self.unit_size_in_bytes * offset) as i32,
             );
             self.gl.enable_vertex_attrib_array(index as u32);
         }
