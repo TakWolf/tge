@@ -23,13 +23,13 @@ impl Touch {
 
     pub(crate) fn clear_states(&mut self) {}
 
-    pub fn touches(&self) -> Vec<u64> {
-        let mut touches = Vec::with_capacity(self.positions.len());
+    pub fn touch_ids(&self) -> Vec<u64> {
+        let mut touch_ids = Vec::with_capacity(self.positions.len());
         for (id, _) in &self.positions {
-            touches.push(*id);
+            touch_ids.push(*id);
         }
-        touches.sort();
-        touches
+        touch_ids.sort();
+        touch_ids
     }
 
     pub fn position(&self, id: u64) -> Option<LogicalPosition> {
