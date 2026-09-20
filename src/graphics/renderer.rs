@@ -7,18 +7,18 @@ use std::rc::Rc;
 pub struct Renderer {
     vertex_array: VertexArray,
     vertex_buffer: VertexBuffer,
-    vertex_size: usize,
+    vertex_capacity: usize,
     element_buffer: ElementBuffer,
-    element_size: usize,
+    element_capacity: usize,
 }
 
 impl Renderer {
-    pub fn init_vertex_size(&mut self, usage: BufferUsage, size: usize) {
+    pub fn init_vertex_capacity(&mut self, usage: BufferUsage, capacity: usize) {
         self.vertex_buffer.bind();
-        self.vertex_buffer.init_size(usage, vertex::ATTRIBUTE_STRIDE * size);
+        self.vertex_buffer.init_size(usage, vertex::ATTRIBUTE_STRIDE * capacity);
         init_vertex_attribute_pointer(&self.vertex_buffer);
         self.vertex_buffer.unbind();
-        self.vertex_size = size;
+        self.vertex_capacity = capacity;
     }
 
     pub fn init_with_vertices(&mut self, usage: BufferUsage, vertices: &[Vertex]) {
@@ -26,7 +26,7 @@ impl Renderer {
         self.vertex_buffer.init_with_data(usage, &convert_vertices_to_data(vertices));
         init_vertex_attribute_pointer(&self.vertex_buffer);
         self.vertex_buffer.unbind();
-        self.vertex_size = vertices.len();
+        self.vertex_capacity = vertices.len();
     }
 
     pub fn update_vertices(&self, offset: usize, vertices: &[Vertex]) {
@@ -35,22 +35,22 @@ impl Renderer {
         self.vertex_buffer.unbind();
     }
 
-    pub fn vertex_size(&self) -> usize {
-        self.vertex_size
+    pub fn vertex_capacity(&self) -> usize {
+        self.vertex_capacity
     }
 
-    pub fn init_element_size(&mut self, usage: BufferUsage, size: usize) {
+    pub fn init_element_capacity(&mut self, usage: BufferUsage, capacity: usize) {
         self.element_buffer.bind();
-        self.element_buffer.init_size(usage, size);
+        self.element_buffer.init_size(usage, capacity);
         self.element_buffer.unbind();
-        self.element_size = size;
+        self.element_capacity = capacity;
     }
 
     pub fn init_with_elements(&mut self, usage: BufferUsage, elements: &[u16]) {
         self.element_buffer.bind();
         self.element_buffer.init_with_data(usage, elements);
         self.element_buffer.unbind();
-        self.element_size = elements.len();
+        self.element_capacity = elements.len();
     }
 
     pub fn update_elements(&self, offset: usize, elements: &[u16]) {
@@ -59,8 +59,8 @@ impl Renderer {
         self.element_buffer.unbind();
     }
 
-    pub fn element_size(&self) -> usize {
-        self.element_size
+    pub fn element_capacity(&self) -> usize {
+        self.element_capacity
     }
 
     pub fn draw_elements(&self, primitive: PrimitiveType, count: usize, offset: usize) {
@@ -74,9 +74,9 @@ pub struct RendererBuilder {
     gl: Rc<Context>,
     vertex_array: VertexArray,
     vertex_buffer: Option<VertexBuffer>,
-    vertex_size: Option<usize>,
+    vertex_capacity: Option<usize>,
     element_buffer: Option<ElementBuffer>,
-    element_size: Option<usize>,
+    element_capacity: Option<usize>,
 }
 
 impl RendererBuilder {
@@ -88,9 +88,9 @@ impl RendererBuilder {
             gl,
             vertex_array,
             vertex_buffer: None,
-            vertex_size: None,
+            vertex_capacity: None,
             element_buffer: None,
-            element_size: None,
+            element_capacity: None,
         })
     }
 
@@ -98,14 +98,14 @@ impl RendererBuilder {
         assert!(self.vertex_buffer.is_none(), "vertex buffer has been setup");
     }
 
-    pub fn init_vertex_size(mut self, usage: BufferUsage, size: usize) -> Self {
+    pub fn init_vertex_capacity(mut self, usage: BufferUsage, capacity: usize) -> Self {
         self.assert_vertex_buffer_not_init();
         let vertex_buffer = Buffer::new_vertex(self.gl.clone()).unwrap();
         vertex_buffer.bind();
-        vertex_buffer.init_size(usage, vertex::ATTRIBUTE_STRIDE * size);
+        vertex_buffer.init_size(usage, vertex::ATTRIBUTE_STRIDE * capacity);
         init_vertex_attribute_pointer(&vertex_buffer);
         self.vertex_buffer = Some(vertex_buffer);
-        self.vertex_size = Some(size);
+        self.vertex_capacity = Some(capacity);
         self
     }
 
@@ -116,7 +116,7 @@ impl RendererBuilder {
         vertex_buffer.init_with_data(usage, &convert_vertices_to_data(vertices));
         init_vertex_attribute_pointer(&vertex_buffer);
         self.vertex_buffer = Some(vertex_buffer);
-        self.vertex_size = Some(vertices.len());
+        self.vertex_capacity = Some(vertices.len());
         self
     }
 
@@ -124,13 +124,13 @@ impl RendererBuilder {
         assert!(self.element_buffer.is_none(), "element buffer has been setup");
     }
 
-    pub fn init_element_size(mut self, usage: BufferUsage, size: usize) -> Self {
+    pub fn init_element_capacity(mut self, usage: BufferUsage, capacity: usize) -> Self {
         self.assert_element_buffer_not_init();
         let element_buffer = Buffer::new_element(self.gl.clone()).unwrap();
         element_buffer.bind();
-        element_buffer.init_size(usage, size);
+        element_buffer.init_size(usage, capacity);
         self.element_buffer = Some(element_buffer);
-        self.element_size = Some(size);
+        self.element_capacity = Some(capacity);
         self
     }
 
@@ -140,7 +140,7 @@ impl RendererBuilder {
         element_buffer.bind();
         element_buffer.init_with_data(usage, elements);
         self.element_buffer = Some(element_buffer);
-        self.element_size = Some(elements.len());
+        self.element_capacity = Some(elements.len());
         self
     }
 
@@ -148,11 +148,11 @@ impl RendererBuilder {
         let vertex_array = self.vertex_array;
         let vertex_buffer = self.vertex_buffer
             .ok_or_else(|| GameError::InitError("must setup vertex buffer".into()))?;
-        let vertex_size = self.vertex_size
+        let vertex_capacity = self.vertex_capacity
             .ok_or_else(|| GameError::InitError("must setup vertex buffer".into()))?;
         let element_buffer = self.element_buffer
             .ok_or_else(|| GameError::InitError("must setup element buffer".into()))?;
-        let element_size = self.element_size
+        let element_capacity = self.element_capacity
             .ok_or_else(|| GameError::InitError("must setup element buffer".into()))?;
         vertex_array.unbind();
         vertex_buffer.unbind();
@@ -160,9 +160,9 @@ impl RendererBuilder {
         Ok(Renderer {
             vertex_array,
             vertex_buffer,
-            vertex_size,
+            vertex_capacity,
             element_buffer,
-            element_size,
+            element_capacity,
         })
     }
 }

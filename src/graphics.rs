@@ -96,11 +96,11 @@ impl Graphics {
         };
 
         let renderer = RendererBuilder::new(gl.clone())?
-            .init_vertex_size(BufferUsage::Stream, graphics_config.renderer_vertex_size)
-            .init_element_size(BufferUsage::Stream, graphics_config.renderer_element_size)
+            .init_vertex_capacity(BufferUsage::Stream, graphics_config.renderer_vertex_capacity)
+            .init_element_capacity(BufferUsage::Stream, graphics_config.renderer_element_capacity)
             .build()?;
-        let vertices = Vec::with_capacity(graphics_config.renderer_vertex_size);
-        let elements = Vec::with_capacity(graphics_config.renderer_element_size);
+        let vertices = Vec::with_capacity(graphics_config.renderer_vertex_capacity);
+        let elements = Vec::with_capacity(graphics_config.renderer_element_capacity);
 
         let draw_command = DrawCommand {
             texture: default_texture.clone(),
@@ -331,11 +331,11 @@ impl Graphics {
 
     fn append_vertices_and_elements(&mut self, vertices: Vec<Vertex>, elements: Option<Vec<u16>>) {
         let mut elements = elements.unwrap_or_else(|| (0..vertices.len() as u16).collect());
-        if self.renderer.vertex_size() < self.vertices.len() + vertices.len() || self.renderer.element_size() < self.elements.len() + elements.len() {
+        if self.renderer.vertex_capacity() < self.vertices.len() + vertices.len() || self.renderer.element_capacity() < self.elements.len() + elements.len() {
             self.flush();
         }
-        assert!(self.renderer.vertex_size() >= self.vertices.len() + vertices.len(), "no enough renderer vertex size");
-        assert!(self.renderer.element_size() >= self.elements.len() + elements.len(), "no enough renderer element size");
+        assert!(self.renderer.vertex_capacity() >= self.vertices.len() + vertices.len(), "no enough renderer vertex capacity");
+        assert!(self.renderer.element_capacity() >= self.elements.len() + elements.len(), "no enough renderer element capacity");
         let append_vertex_count = vertices.len() as u16;
         let element_offset = self.vertices.len() as u16;
         for element in &mut elements {
@@ -580,8 +580,8 @@ impl Graphics {
 pub struct GraphicsConfig {
     default_filter: Filter,
     default_wrap: Wrap,
-    renderer_vertex_size: usize,
-    renderer_element_size: usize,
+    renderer_vertex_capacity: usize,
+    renderer_element_capacity: usize,
 }
 
 impl GraphicsConfig {
@@ -589,8 +589,8 @@ impl GraphicsConfig {
         Self {
             default_filter: Filter::default(),
             default_wrap: Wrap::default(),
-            renderer_vertex_size: SPRITE_VERTEX_COUNT * 2048,
-            renderer_element_size: SPRITE_ELEMENT_COUNT * 2048,
+            renderer_vertex_capacity: SPRITE_VERTEX_COUNT * 2048,
+            renderer_element_capacity: SPRITE_ELEMENT_COUNT * 2048,
         }
     }
 
@@ -604,19 +604,19 @@ impl GraphicsConfig {
         self
     }
 
-    pub fn renderer_vertex_size(mut self, size: usize) -> Self {
-        self.renderer_vertex_size = size;
+    pub fn renderer_vertex_capacity(mut self, capacity: usize) -> Self {
+        self.renderer_vertex_capacity = capacity;
         self
     }
 
-    pub fn renderer_element_size(mut self, size: usize) -> Self {
-        self.renderer_element_size = size;
+    pub fn renderer_element_capacity(mut self, capacity: usize) -> Self {
+        self.renderer_element_capacity = capacity;
         self
     }
 
-    pub fn renderer_sprite_size(mut self, size: usize) -> Self {
-        self.renderer_vertex_size = SPRITE_VERTEX_COUNT * size;
-        self.renderer_element_size = SPRITE_ELEMENT_COUNT * size;
+    pub fn renderer_sprite_capacity(mut self, capacity: usize) -> Self {
+        self.renderer_vertex_capacity = SPRITE_VERTEX_COUNT * capacity;
+        self.renderer_element_capacity = SPRITE_ELEMENT_COUNT * capacity;
         self
     }
 }
